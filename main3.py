@@ -16,31 +16,31 @@ the dataset: be careful to create only one Team object for each team.
 
 """
 
+if __name__ == "__main__":
+    teams = {}
+    with open('f1_points.csv', 'r') as file:
+        next(file)  # Skip the header
+        for line in file:
+            driver_name, team_name, points = line.strip().split(',')
+            points = int(points)
 
-teams = {}
-with open('f1_points.csv', 'r') as file:
-    next(file)  # Skip the header
-    for line in file:
-        driver_name, team_name, points = line.strip().split(',')
-        points = int(points)
+            # Create or retrieve the team
+            if team_name not in teams:
+                teams[team_name] = Team(team_name) 
 
-        # Create or retrieve the team
-        if team_name not in teams:
-            teams[team_name] = Team(team_name) 
-
-        # Create the driver and add them to the team
-        driver = Driver(driver_name, points)
-        teams[team_name].add_driver(driver)
-
-
-# Task 3
-
-# .values() retrives the objects needed to compare the total points against
-
-# get the values of the dictionary which are the Team Objects themselves and sort them
+            # Create the driver and add them to the team
+            driver = Driver(driver_name, points)
+            teams[team_name].add_driver(driver)
 
 
-sorted_teams = sorted(teams.values()) 
+    # Task 3
 
-print(sorted_teams)
+    # .values() retrives the objects needed to compare the total points against
+
+    # get the values of the dictionary which are the Team Objects themselves and sort them
+
+
+    sorted_teams = sorted(teams.values()) 
+
+    print(sorted_teams)
 
